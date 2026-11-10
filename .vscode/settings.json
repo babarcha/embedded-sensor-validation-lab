@@ -1,0 +1,5 @@
+{
+    "cmake.sourceDirectory": "C:/Users/babar/gehealth-sensor-validation-lab/firmware",
+    "idf.currentSetup": "C:/Espressif/frameworks/esp-idf-v5.5.5/",
+    "C_Cpp.default.compilerPath": "C:/msys64/ucrt64/bin/gcc.exe"
+}
