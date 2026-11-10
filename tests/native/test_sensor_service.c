@@ -7,20 +7,24 @@ static esp_err_t read_result = ESP_OK;
 static int32_t fake_temp = 2345;
 static uint32_t fake_pressure = 101325;
 
-esp_err_t bmp280_init(bmp280_t *dev) {
+esp_err_t bmp280_init(bmp280_t *dev)
+{
     (void)dev;
     return init_result;
 }
 
-esp_err_t bmp280_read(bmp280_t *dev, int32_t *t, uint32_t *p) {
+esp_err_t bmp280_read(bmp280_t *dev, int32_t *t, uint32_t *p)
+{
     (void)dev;
-    if (read_result != ESP_OK) return read_result;
+    if (read_result != ESP_OK)
+        return read_result;
     *t = fake_temp;
     *p = fake_pressure;
     return ESP_OK;
 }
 
-int main(void) {
+int main(void)
+{
     sensor_service_t s;
     int32_t t = 0;
     uint32_t p = 0;
@@ -33,8 +37,20 @@ int main(void) {
     assert(sensor_service_read(&s, &t, &p) == ESP_OK);
     assert(t == 2345 && p == 101325);
 
+    /*
+     * Pass 3: Fault injection test.
+     *
+     * A failed sensor read must not leave stale
+     * measurements in the output parameters.
+     */
     s.inject_timeout = true;
+
     assert(sensor_service_read(&s, &t, &p) == ESP_ERR_TIMEOUT);
+
+    /* Expected safe output values after failure */
+    assert(t == 0);
+    assert(p == 0);
+
     s.inject_timeout = false;
 
     read_result = ESP_ERR_TIMEOUT;
