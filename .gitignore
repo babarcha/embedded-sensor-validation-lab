@@ -4,3 +4,6 @@ firmware/sdkconfig.old
 __pycache__/
 .pytest_cache/
 .venv/
+
+# Native test executables
+/tests/native/*.exe
