@@ -1,0 +1,46 @@
+
+name: Sensor Validation CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  native-tests:
+    name: Native C Unit Tests
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check GCC version
+        run: gcc --version
+
+      - name: Compile and execute native tests
+        run: bash tests/native/run_native.sh
+
+  simulator-tests:
+    name: Python Simulator Validation
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install test dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install pytest pyserial
+
+      - name: Run simulator validation
+        run: |
+          python -m pytest tests/validation \
+            --device simulator \
+            -v
