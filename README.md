@@ -1,11 +1,9 @@
 
-# ESP32 Sensor Validation Lab
+# Embedded Sensor Validation Lab — ESP32 Firmware, Fault Injection and Automated Testing
 
-A compact embedded software development and validation project
-inspired by sensor software engineering workflows in healthcare
-technology.
+A compact embedded software development and validation lab demonstrating ESP32 sensor firmware, BMP280 I²C integration, defensive error handling, deterministic fault injection, native C unit testing, Python-based simulation, hardware-in-the-loop validation, and GitHub Actions CI.
 
-Built with ESP-IDF, C, Python, pytest, and GitHub Actions.
+The project illustrates a layered approach to embedded sensor software development, from firmware implementation to automated verification.
 
 ## Project objectives
 
