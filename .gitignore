@@ -7,3 +7,19 @@ __pycache__/
 
 # Native test executables
 /tests/native/*.exe
+
+# ESP-IDF generated files
+firmware/build/
+
+# Python generated files
+__pycache__/
+.pytest_cache/
+*.pyc
+.venv/
+
+# Native C test binaries
+tests/native/*.exe
+
+# IDE and OS temporary files
+.DS_Store
+Thumbs.db
